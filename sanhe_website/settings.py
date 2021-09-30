@@ -15,7 +15,7 @@ import os
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
-PROJECT_DIR =  Path.joinpath(BASE_DIR, "sanhe_website")
+#PROJECT_DIR =  Path.joinpath(BASE_DIR, "sanhe_website")
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.2/howto/deployment/checklist/
@@ -42,7 +42,6 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django.contrib.sessions',
-
 ]
 
 MIDDLEWARE = [
@@ -60,7 +59,7 @@ ROOT_URLCONF = 'sanhe_website.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [Path.joinpath(PROJECT_DIR, "templates")],
+        'DIRS': [BASE_DIR / "templates",],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -73,12 +72,6 @@ TEMPLATES = [
     },
 ]
 
-#Added file structure to use Charts.js, styvio 
-SITE_ROOT = os.path.dirname(os.path.realpath(__file__))
-STATICFILES_DIRS = [
-    os.path.join(SITE_ROOT, 'static/'),
-    os.path.join(SITE_ROOT, 'media/'),
-]
 
 
 WSGI_APPLICATION = 'sanhe_website.wsgi.application'
@@ -158,7 +151,13 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
+#Added file structure to use Charts.js, styvio 
+STATICFILES_DIRS = [
+     BASE_DIR / "static", # os.path.join(BASE_DIR, 'static')
+]
+
 # Default primary key field type
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
