@@ -95,132 +95,33 @@
         
     <div class="position-relative">
     <!--投资周报-->
-    <p class="badge badge-pill badge-light pill1 top-right1">&nbsp;&nbsp;投资周报&nbsp;&nbsp;</p>
+    <p class="badge badge-pill badge-light pill1 top-right1" contenteditable="true">&nbsp;&nbsp;投资周报&nbsp;&nbsp;</p>
     <p class="badge badge-pill badge-light pill2 top-right2" contenteditable="true">&nbsp;&nbsp;&nbsp;&nbsp;2021.7.23&nbsp;&nbsp;</p>
     </div>
 
     </div>
 
-    <!--------------------------------------TABLE ONE------------------------------------------->
-    <div class="containerT1">
-        <h3 class="text-center padtitle">本周产品表现</h3>
-        <table class="table">
-            <caption class="text-right decreasefont_caption">*预估净值非正式净值，仅供参考。</caption>
-            <thead class="text-center text-black-50">     
-            <tr class="align-middle">
-                <th class="increasefont_firstrow">基金简称</th>
-                <th class="increasefont_firstrow">较上周涨跌幅<span class="incerasepad_T1column2"></span></th>
-                <th class="increasefont_firstrow">预估净值</th>
-            </tr>
-            </thead>
-        
-            <tbody class="text-center" id ="table1">
-            </tbody>
-        </table>
-    </div>
-
-    <!--------------------------------------TABLE TWO------------------------------------------->
-    <div class="containerT2">
-        <h3 class="text-center padtitle">本周大盘表现</h3>         
-        <table class="table">
-            <thead class="text-center text-black-50">     
-            <tr class="align-middle">
-                <th class="increasefont_firstrow">指数名称</th>
-                <th class="increasefont_firstrow">周涨跌幅</th>
-                <th class="increasefont_firstrow">收盘价</th>
-            </tr>
-            </thead>
-        
-            <tbody class="text-center">   
-            <tr class="increasefont_cell">
-                <td>上证指数</td>
-                <td class="align-middle" id="T2B2" contenteditable="true"></td>
-                <td class="align-middle" id="T2C2" contenteditable="true"></td>
-            </tr>
-            <tr class="increasefont_cell">
-                <td>沪深300</td>
-                <td class="align-middle" id="T2B3" contenteditable="true"></td>
-                <td class="align-middle" id="T2C3" contenteditable="true"></td>
-            </tr>
-            <tr class="increasefont_cell">
-                <td>创业板指</td>
-                <td class="align-middle" id="T2B4" contenteditable="true"></td>
-                <td class="align-middle" id="T2C4" contenteditable="true"></td>
-            </tr>
-            <tr class="increasefont_cell">
-                <td>科创50</td>
-                <td class="align-middle" id="T2B5" contenteditable="true"></td>
-                <td class="align-middle" id="T2C5" contenteditable="true"></td>
-            </tr>
-            </tbody>
-        </table>
-    </div>
-
     <!-----------------------------PARAGRAPH----------------------------------->
     <div class="containerT3">
-        <h3 class="text-center padtitle">三和观点</h3>
+        <h3 class="text-center padtitle" contenteditable="true">说明书</h3>
         <div class="increasepad_T3 text-justify">
-        <p class="T3" contenteditable="true">{% include 'index_insight.html' %}</p>         
-        <h6 class="text-muted decreasefont_captionT3">
-            *本报告仅供本公司内部及本产品特定客户参考，并不构成对客户任何形式投资操作建议。
-            任何机构和个人未经本公司授权不得以任何形式传阅、复制、刊登、发表或引用。
-        </h6>
+        <p class="T3" contenteditable="true">
+            产品主页面为 http: .../products <br>
+            产品各页面为 http: .../products/zhantou1 <br>
+            产品各页面为 http: .../products/taishan1 <br>
+            产品各页面为 http: .../products/xiangjun1 <br>
+            产品各页面为 http: .../products/gaohua1 <br>
+            产品各页面为 http: .../products/xinshidai8 <br>
+        </p>         
+
         </div>
     </div>
 </body>
 
 <script>
 
-    //load data from csv
-    let filename = '../static/zonghui.csv';
-
-    d3.csv(filename).then(function(loadedData){
-        let count = 0;
-
-        loadedData.forEach(product => {
-            if (product.PRODUCT == '沪深300指数'){
-                //table1 不显示沪深
-            }else {
-                //create an id per row
-                count += 1;
-                let id = 'T1R' + count;
-
-                //breaks down html per row
-                let product_html1 = '<tr class="increasefont_cell">';
-                
-                let productname_html1 = '<td>';
-                let productname_html2 = product.PRODUCT;
-                let productname_html3 = '<p class="decreasepad_nestcell">(';
-                let productname_html4 = product.STARTDATE;
-                let productname_html5 = ' 成立)</p></td>';
-
-                let productweek_html1 = '<td class="align-middle"><span ';
-                let productweek_id = 'id="' + id + '"';
-                let productweek_color = " style=" + "'color:" + ((product.WEEK.replace("%","") >= 0) ? 'red' : 'lime') + "'>";
-                let productweek_html2 = product.WEEK;
-                let productweek_html3 = '</span><span class="incerasepad_T1column2"></span></td>';
-                
-                let productnetworth_html1 = '<td class="align-middle">';
-                let productnetworth_html2 = product.NETWORTH;
-                let productnetworth_html3 = '</td>';
-                
-                let product_html2 = '</tr>'
-                
-                //entire html to be added
-                let product_row =             
-                product_html1 
-                + productname_html1 + productname_html2 + productname_html3 + productname_html4 + productname_html5
-                + productweek_html1 + productweek_id + productweek_color + productweek_html2 + productweek_html3 
-                + productnetworth_html1 + productnetworth_html2 + productnetworth_html3
-                + product_html2;
-
-                //append html to table 1
-                var T1 = document.getElementById("table1");
-                T1.insertAdjacentHTML('beforeend', product_row);
-                console.log(product_row);
-            }
-        });
-    }); //end of reading csv
+    
+    //end of reading csv
 
     //load data from online
 
