@@ -1,0 +1,263 @@
+<!---
+可以重复利用，需要更新的有：
+
+foreach "三和战投1期"
+标题 title
+时间 date
+本周回顾 review
+三和观点 insight
+成立日期 startdate
+
+-->
+{% extends 'base.html' %}
+
+{% block title %} 三和创赢战投1期 {% endblock %}
+
+{% block content %}
+
+{% load static %}
+
+<style>
+    .padtitle {
+        padding-left: 0.7em;
+        padding-bottom: 30px;
+        color:#495057;
+        font-weight: 450;
+    }
+    .containerT1 {
+        padding: 40px 15px;
+    }
+    .containerT2 {
+        margin-top: -20px;
+        padding: 0px 15px;
+    }
+    .containerT3 {
+        margin-top: 20px;
+        padding: 0px 15px;
+        padding-top: 50px;
+    }
+    .font_T1ROW2{
+        font-size: 24px;
+    }
+    .font_T1A1{
+        font-size: 44px;
+        color: red;
+    }
+    .font_T1B1C1{
+        font-size: 30px;
+        color: #495057;
+    }
+    .font_T3ROW1{
+        font-size: 24px;
+        font-weight: 400;
+    }
+    .font_cell{
+        font-size: 24px;
+        color: #495057;
+    }
+    .font_caption{
+        font-size: 12px;
+    }
+    .font_captionT3{
+        padding-left: 20px;
+        font-size: 15px;
+        font-weight: 400;
+        color: #9b9ea1;
+    }
+    .containerP1 {
+        margin-top: 20px;
+        padding: 50px 15px;
+        padding-right: 30px;
+    }
+    .containerP2 {
+        padding: 50px 15px;
+        padding-right: 30px;
+        padding-top: 0px;
+    }
+    .P1{
+        font-size: 22px;
+        font-weight: 400;
+        color: #495057;
+    }
+    .pad_P1{
+        padding-left: 1em ;
+    }
+    @media screen and (min-width: 1000px){
+    .pad_P1{
+        padding-left: 10%;
+        padding-right: 10%;
+    }
+}
+
+</style>
+
+<body>
+
+    <!--------------------------------------TABLE ONE------------------------------------------->
+    <div class="containerT1">
+        <h2 class="padtitle" id="maintitle"></h2>
+        <table class="table table-borderless table-condensed">
+            <caption class="text-right font_caption">*预估净值非正式净值，仅供参考。</caption>
+            <tbody class="text-center">
+                <tr style="line-height: 10px;height: 10px;">
+                    <td class="font_T1A1" id="T1A1"></td>
+                    <td class="font_T1B1C1" id="T1B1"></td>
+                    <td class="font_T1B1C1 text-right" id="T1C1"></td>
+                </tr>
+                <tr class="text-black-50 font_T1ROW2">
+                    <td>本周收益</td>
+                    <td>预估净值</td>
+                    <td class="text-right">成立以来收益</td>
+                </tr>
+            </tbody>
+        </table>
+        <hr/>
+    </div>
+
+    <!--------------------------------------TABLE TWO------------------------------------------->
+    <div class="containerT2">
+        <!--------------------------------------------------- FIX VARIATION -------------------------------------------------->
+        <h2 class="padtitle">业绩走势<small class="text-muted">&nbsp;&nbsp;成立日期：2020-3-24</small></h2>
+        <!--------------------------------------------------- FIX VARIATION -------------------------------------------------->
+        <p class="P1">{% include 'zhantou1_chart.html' %}</p>
+    </div>
+    
+    <!--------------------------------------TABLE THREE------------------------------------------->
+    <div class="containerT3">
+        <h2 class="padtitle">阶段涨幅</h2>         
+        <table class="table" style="border-bottom: 1px solid #dddddd;">
+            <thead class="text-black-50">     
+            <tr class="align-middle">
+                <th class="font_T3ROW1">&nbsp;&nbsp;&nbsp;&nbsp;时间</th>
+                <th class="text-center font_T3ROW1">本产品</th>
+                <th class="text-center font_T3ROW1">沪深300</th>
+            </tr>
+            </thead>
+        
+            <tbody>   
+            <tr class="font_cell">
+                <td>&nbsp;&nbsp;&nbsp;&nbsp;近1周</td>
+                <td class="text-center align-middle" id="T2B2"></td>
+                <td class="text-center align-middle" id="T2C2"></td>
+            </tr>
+            <tr class="font_cell">
+                <td>&nbsp;&nbsp;&nbsp;&nbsp;近1月</td>
+                <td class="text-center align-middle" id="T2B3"></td>
+                <td class="text-center align-middle" id="T2C3"></td>
+            </tr>
+            <tr class="font_cell">
+                <td>&nbsp;&nbsp;&nbsp;&nbsp;近3月</td>
+                <td class="text-center align-middle" id="T2B4"></td>
+                <td class="text-center align-middle" id="T2C4"></td>
+            </tr>
+            <tr class="font_cell">
+                <td>&nbsp;&nbsp;&nbsp;&nbsp;成立以来</td>
+                <td class="text-center align-middle" id="T2B5"></td>
+                <td class="text-center align-middle" id="T2C5"></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <!-----------------------------PARAGRAPHONE----------------------------------->
+    <div class="containerP1">
+        <h2 class="padtitle">本周回顾</h2>
+        <div class="pad_P1 text-justify">
+            <p class="P1" contenteditable="true">{% include 'zhantou1_review.html' %}</p>         
+        </div>
+    </div>
+
+    <!-----------------------------PARAGRAPHTWO----------------------------------->
+    <div class="containerP2">
+        <h2 class="padtitle">三和观点</h2>
+        <div class="pad_P1 text-justify">
+            <p class="P1" contenteditable="true">{% include 'zhantou1_insight.html' %}</p>
+            <h6 class="font_captionT3">
+                *本报告仅供本公司内部及本产品特定客户参考，并不构成对客户任何形式投资操作建议。
+                任何机构和个人未经本公司授权不得以任何形式传阅、复制、刊登、发表或引用。
+            </h6>         
+        </div>
+    </div>
+    
+    <!---------------------------------------------------------------------------->
+</body>
+
+<script>
+        /*--------------------------------------------------- WEEK VARIATION --------------------------------------------------*/
+        let title = '三和创赢战投1期';
+        let middle = '<small class="text-muted">&nbsp;&nbsp;';
+        let date = '7月2日';
+        let end = '周报</small>';
+
+        /*标题*/document.getElementById("maintitle").innerHTML = title + middle + date + end;
+        /*--------------------------------------------------- WEEK VARIATION --------------------------------------------------*/
+    //Read csv file
+    let filename = '../static/zonghui.csv';
+    d3.csv(filename).then(function(loadedData){
+
+        loadedData.forEach(productName => {
+            
+            //Search for 战投1期 的行数
+            switch (productName.PRODUCT){
+                /*--------------------------------------------------- FIX VARIATION --------------------------------------------------*/
+                case "三和战投1期":
+                /*--------------------------------------------------- FIX VARIATION --------------------------------------------------*/
+                    //Table 1 Row 1
+                    /*本周收益*/var T1A1 = productName.WEEK;
+                    /*预估净值*/var T1B1 = productName.NETWORTH;
+                    /*成立以来收益*/var T1C1 = productName.MAX;
+
+                    /*本周收益*/document.getElementById("T1A1").innerHTML = T1A1;
+                    /*预估净值*/document.getElementById("T1B1").innerHTML = T1B1;
+                    /*成立以来收益*/document.getElementById("T1C1").innerHTML = T1C1;
+
+                    document.getElementById("T1A1").style.color = (T1A1 >= 0) ? 'red' : 'lime';
+
+                    //Table 2 Column 2
+                    var T2B2 = productName.WEEK;
+                    var T2B3 = productName.MONTH;
+                    var T2B4 = productName.THREEMONTH;
+                    var T2B5 = productName.MAX;
+
+                    //Set + - and Assign value
+                    /*1周本*/document.getElementById("T2B2").innerHTML = ((T2B2.replace("%","") >= 0) ? '+':'') + T2B2;
+                    /*1月本*/document.getElementById("T2B3").innerHTML = ((T2B3.replace("%","") >= 0) ? '+':'') + T2B3;
+                    /*3月本*/document.getElementById("T2B4").innerHTML = ((T2B4.replace("%","") >= 0) ? '+':'') + T2B4;
+                    /*成立本*/document.getElementById("T2B5").innerHTML = ((T2B5.replace("%","") >= 0) ? '+':'') + T2B5;
+
+                    //Set Color
+                    document.getElementById("T2B2").style.color = (T2B2.replace("%","") >= 0) ? 'red' : 'lime';
+                    document.getElementById("T2B3").style.color = (T2B3.replace("%","") >= 0) ? 'red' : 'lime';
+                    document.getElementById("T2B4").style.color = (T2B4.replace("%","") >= 0) ? 'red' : 'lime';
+                    document.getElementById("T2B5").style.color = (T2B5.replace("%","") >= 0) ? 'red' : 'lime';
+                    break;
+
+                case "沪深300指数":
+                    //Table 2 Column 3
+                    var T2C2 = productName.WEEK;
+                    var T2C3 = productName.MONTH;
+                    var T2C4 = productName.THREEMONTH;
+                    var T2C5 = productName.MAX;
+                    
+                    //Set + - and Assign value
+                    /*1周本*/document.getElementById("T2C2").innerHTML = ((T2C2.replace("%","") >= 0) ? '+':'') + T2C2;
+                    /*1月本*/document.getElementById("T2C3").innerHTML = ((T2C3.replace("%","") >= 0) ? '+':'') + T2C3;
+                    /*3月本*/document.getElementById("T2C4").innerHTML = ((T2C4.replace("%","") >= 0) ? '+':'') + T2C4;
+                    /*成立本*/document.getElementById("T2C5").innerHTML = ((T2C5.replace("%","") >= 0) ? '+':'') + T2C5;
+                
+                    //Set Color
+                    document.getElementById("T2C2").style.color = (T2C2.replace("%","") >= 0) ? 'red' : 'lime';
+                    document.getElementById("T2C3").style.color = (T2C3.replace("%","") >= 0) ? 'red' : 'lime';
+                    document.getElementById("T2C4").style.color = (T2C4.replace("%","") >= 0) ? 'red' : 'lime';
+                    document.getElementById("T2C5").style.color = (T2C5.replace("%","") >= 0) ? 'red' : 'lime';
+                    break;
+                default:
+
+            } //end of switch
+        });
+        
+        
+    }); //end of reading csv
+</script>
+
+{% endblock %}
