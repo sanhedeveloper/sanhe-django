@@ -1,4 +1,4 @@
-{% extends 'base.html' %}
+{% extends './base.html' %}
 
 {% block title %} 三和创赢 {% endblock %}
 
@@ -91,12 +91,12 @@
 
     <div>
     <!--IMAGE-->
-    <img src="/static/assets/default.jpg" style="width:100%" class="img-fluid">
+    <img src="../../static/assets/default.jpg" style="width:100%" class="img-fluid">
         
     <div class="position-relative">
     <!--投资周报-->
     <p class="badge badge-pill badge-light pill1 top-right1">&nbsp;&nbsp;投资周报&nbsp;&nbsp;</p>
-    <p class="badge badge-pill badge-light pill2 top-right2" contenteditable="true">&nbsp;&nbsp;&nbsp;&nbsp;2021.7.23&nbsp;&nbsp;</p>
+    <p class="badge badge-pill badge-light pill2 top-right2" contenteditable="true">&nbsp;&nbsp;&nbsp;&nbsp;{{TODAY}}&nbsp;&nbsp;</p>
     </div>
 
     </div>
@@ -149,7 +149,8 @@
             </tr>
             <tr class="increasefont_cell">
                 <td>科创50</td>
-                <td class="align-middle" id="T2B5" contenteditable="true"></td>
+                <td class="align-middle"><input id="T2B5"onchange="changeColor()" style="border:0;display:inline-block;">
+                </td>
                 <td class="align-middle" id="T2C5" contenteditable="true"></td>
             </tr>
             </tbody>
@@ -160,7 +161,7 @@
     <div class="containerT3">
         <h3 class="text-center padtitle">三和观点</h3>
         <div class="increasepad_T3 text-justify">
-        <p class="T3" contenteditable="true">{% include 'index_insight.html' %}</p>         
+        <p class="T3" contenteditable="true">{% include './index_insight.html' %}</p>         
         <h6 class="text-muted decreasefont_captionT3">
             *本报告仅供本公司内部及本产品特定客户参考，并不构成对客户任何形式投资操作建议。
             任何机构和个人未经本公司授权不得以任何形式传阅、复制、刊登、发表或引用。
@@ -222,7 +223,81 @@
         });
     }); //end of reading csv
 
-    //load data from online
+
+
+    //load 上证指数 data
+    //load data from csv
+    let filename_sz = '../static/shangzheng_data.csv';
+
+    d3.csv(filename_sz).then(function(loadedData){
+        //get row 1 and last row 
+        const firstsummary = loadedData[0];
+        const lastsummary = loadedData[loadedData.length-1];
+
+        //收盘价 check stock code
+        if (lastsummary.code == 'sh.000001'){
+                document.getElementById("T2C2").innerHTML = parseFloat(lastsummary.close).toFixed(2);
+        }
+        //周涨跌幅
+        if (firstsummary.code == 'sh.000001'){
+                var weekchange = (lastsummary.close - firstsummary.close)/firstsummary.close*100;
+                document.getElementById("T2B2").innerHTML = weekchange.toFixed(2) + '%';
+                document.getElementById("T2B2").style.color = (weekchange.toFixed(2) >= 0) ? 'red' : 'lime';
+        }
+       
+    }); //end of reading csv
+
+
+
+    //load 沪深300指数 data
+    //load data from csv
+    let filename_hs = '../static/hushen300_data.csv';
+
+    d3.csv(filename_hs).then(function(loadedData){
+        //get row 1 and last row 
+        const firstsummary = loadedData[0];
+        const lastsummary = loadedData[loadedData.length-1];
+
+        //收盘价 check stock code
+        if (lastsummary.code == 'sh.000300'){
+                document.getElementById("T2C3").innerHTML = parseFloat(lastsummary.close).toFixed(2);
+        }
+        //周涨跌幅
+        if (firstsummary.code == 'sh.000300'){
+                var weekchange = (lastsummary.close - firstsummary.close)/firstsummary.close*100;
+                document.getElementById("T2B3").innerHTML = weekchange.toFixed(2) + '%';
+                document.getElementById("T2B3").style.color = (weekchange.toFixed(2) >= 0) ? 'red' : 'lime';
+        }
+       
+    }); //end of reading csv
+
+    //load 创业板指指数 data
+    //load data from csv
+    let filename_cybz = '../static/chuangyebanzhi_data.csv';
+
+    d3.csv(filename_cybz).then(function(loadedData){
+        //get row 1 and last row 
+        const firstsummary = loadedData[0];
+        const lastsummary = loadedData[loadedData.length-1];
+
+        //收盘价 check stock code
+        if (lastsummary.code == 'sz.399006'){
+                document.getElementById("T2C4").innerHTML = parseFloat(lastsummary.close).toFixed(2);
+        }
+        //周涨跌幅
+        if (firstsummary.code == 'sz.399006'){
+                var weekchange = (lastsummary.close - firstsummary.close)/firstsummary.close*100;
+                document.getElementById("T2B4").innerHTML = weekchange.toFixed(2) + '%';
+                document.getElementById("T2B4").style.color = (weekchange.toFixed(2) >= 0) ? 'red' : 'lime';
+        }
+    }); //end of reading csv
+
+
+    //临时手工填写
+    function changeColor() {
+        let x = document.getElementById("T2B5");
+        x.style.color = (x.innerHTML.replace("%","") >= 0) ? 'red' : 'lime';
+    }
 
 </script>
 

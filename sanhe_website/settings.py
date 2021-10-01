@@ -24,7 +24,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY') or 'django-insecure-(p1d(rie-+ni(%vsia9b6m%wak+f+t&!)((9mfb3lm9=w6_&%m'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = str(os.environ.get('DEBUG')) == "1" # 1 == True, when production use str(os.environ.get('DEBUG')) == "1"
+DEBUG = "1" # 1 == True, when production use str(os.environ.get('DEBUG')) == "1"
 
 ENV_ALLOWED_HOST = os.environ.get('DJANGO_ALLOWED_HOST') or None
 ALLOWED_HOSTS = ['127.0.0.1', 'localhost']
@@ -59,7 +59,7 @@ ROOT_URLCONF = 'sanhe_website.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [BASE_DIR / "templates",],
+        'DIRS': [],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -152,9 +152,11 @@ USE_TZ = True
 STATIC_URL = '/static/'
 
 #Added file structure to use Charts.js, styvio 
-STATICFILES_DIRS = [
-     BASE_DIR / "static", # os.path.join(BASE_DIR, 'static')
-]
+#STATICFILES_DIRS = [
+#     BASE_DIR / "static", # os.path.join(BASE_DIR, 'static')
+#]
+
+#STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles")
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
