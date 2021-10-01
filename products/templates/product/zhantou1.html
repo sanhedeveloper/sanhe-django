@@ -9,7 +9,7 @@ foreach "三和战投1期"
 成立日期 startdate
 
 -->
-{% extends 'base.html' %}
+{% extends './base.html' %}
 
 {% block title %} 三和创赢战投1期 {% endblock %}
 
@@ -119,7 +119,7 @@ foreach "三和战投1期"
         <!--------------------------------------------------- FIX VARIATION -------------------------------------------------->
         <h2 class="padtitle">业绩走势<small class="text-muted">&nbsp;&nbsp;成立日期：2020-3-24</small></h2>
         <!--------------------------------------------------- FIX VARIATION -------------------------------------------------->
-        <p class="P1">{% include 'zhantou1_chart.html' %}</p>
+        <p class="P1">{% include './zhantou1_chart.html' %}</p>
     </div>
     
     <!--------------------------------------TABLE THREE------------------------------------------->
@@ -163,7 +163,7 @@ foreach "三和战投1期"
     <div class="containerP1">
         <h2 class="padtitle">本周回顾</h2>
         <div class="pad_P1 text-justify">
-            <p class="P1" contenteditable="true">{% include 'zhantou1_review.html' %}</p>         
+            <p class="P1" contenteditable="true">{% include './zhantou1_review.html' %}</p>         
         </div>
     </div>
 
@@ -171,7 +171,7 @@ foreach "三和战投1期"
     <div class="containerP2">
         <h2 class="padtitle">三和观点</h2>
         <div class="pad_P1 text-justify">
-            <p class="P1" contenteditable="true">{% include 'zhantou1_insight.html' %}</p>
+            <p class="P1" contenteditable="true">{% include './zhantou1_insight.html' %}</p>
             <h6 class="font_captionT3">
                 *本报告仅供本公司内部及本产品特定客户参考，并不构成对客户任何形式投资操作建议。
                 任何机构和个人未经本公司授权不得以任何形式传阅、复制、刊登、发表或引用。

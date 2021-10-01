@@ -8,5 +8,6 @@ urlpatterns = [
     path('xinshidai8',views.xinshidai8, name="xinshidai8"),
     path('taishan1',views.taishan1,name="taishan1"),
     path('xiangjun1',views.xiangjun1,name="xiangjun1"),
-    path('gaohua1',views.gaohua1,name="gaohua1")
+    path('gaohua1',views.gaohua1,name="gaohua1"),
+    path('upload', views.my_view, name='my-view'),
 ]
